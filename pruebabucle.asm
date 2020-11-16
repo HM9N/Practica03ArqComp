@@ -4,8 +4,7 @@ Vector: .word 45, 32, 45, 88, 100
 
 .text
 
-Main: 
-	addi $t0, $zero, 0 # se le asigna al registro $t3 el valor de 0
+Main: 	li $t0, 0 # se le asigna al registro $t3 el valor de 0
 	la $t1, Vector #guardar la dirección del vector 
 
 Loop:	sll $t2, $t0, 2 #tenemos organizado 4*i
