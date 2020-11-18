@@ -53,20 +53,16 @@ Main: # Abrir (para lectura) un archivo
 	syscall
 	
 	# Se guarda el número ingresado por el usuario 
-	move $t3,$v0 #hacer una copia del entero ingresado por el usuario en el registro $s3
+	move $t3,$v0 #hacer una copia del entero ingresado por el usuario en el registro $t3
 	
 	li $s3, 0 # se le asigna al registro $t0 el valor de 0 (funcionará como i)
-	
-	#li $v0, 4 #SYSCALL para imprimir un mensaje en consola
-	#la $t0, textoEntrada
-	#lb $a0, 1($t0)
-	#li $v0, 11
-	#syscall
 	
 	#El siguiente loop se encarga de ejecutar el programa hasta que sea completado
 	# el número de búsquedas que desea el usuario
       	
 Loop01:	#textoEntrada Se empieza el primer while
+	slt $at, $s3, $t3 # if ($s3 < $t3) returns 1
+	beqz $at, Exit  #se realiza la comparacion if($at == 0)
 	li $t4, 0 # $t4 funcionará cowcv7 umo un contador para el siguiente ciclo llamado j (se le asigna el valor de 0)
 	li $v0, 4 # mostrar mensaje a usuario
 	la $a0, mensaje02 
@@ -75,9 +71,6 @@ Loop01:	#textoEntrada Se empieza el primer while
 	la $a0, cadenaAbuscar
 	li $a1, 200
 	syscall
-	slt $at, $s3, $t3 # if ($s3 < $t3) returns 1
-	bnez $at, Loop02  #se realiza la comparacion if($at != 0)
-	j Exit
 	## Se ejecuta el while que va a leer todos los caracteres del archivo 
 Loop02:	la $t1, textoEntrada #guardar la dirección del texto de entrada
 	add $t1, $t1, $t4 #se le suma j a la dirección de memoria del texto
@@ -95,7 +88,7 @@ endLoop01: addi $s3, $s3, 1 # i = i+1
 	  j Loop01 #Se devuelve a la etiqueta Loop
 	
 Exit: li $v0, 4 #SYSCALL para imprimir un mensaje en consola
-      la $a0, mensaje01 #mensaje a imprimir
+      la $a0, mensaje03 #mensaje a imprimir
       syscall
       li $v0, 10 #SYSCALL para finalizar la ejecución del programa
       syscall
