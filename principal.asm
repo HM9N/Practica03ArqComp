@@ -1,7 +1,7 @@
 # Arquitectura de Computadores y Laboratorio
 # 2020-01
 # Laboratorio 03
-# Harry Vásquez y Brandon Duque
+# Jhon Vásquez y Brandon Duque
 # Universidad de Antioquia 
 # Medellín - Colombia
 
